@@ -13,7 +13,7 @@ ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game w
 | JoeBiden | A guard that has slowed movement but enhanced firepower (yes him spawning in front of stairs was a intended feature) |
 | Kid | A short d class that spawns in SCP-330 and can pick up 5 candies |
 | SCP-999 | A tutorial that spawns in scp-330 also provides passive regeneration to nearby players and can pickup 20 pieces of candy |
-| Site Costume Manager | A scientist that can disguise all people in the same room as him as scientists for a minute by pressing ALT (has a 120 second cooldown) |
+| Site Costume Manager | A scientist that can disguise all people in the same room as him as scientists for a minute by pressing ALT (has a 2 minute cooldown) |
 
 ### Config
 ```yml
