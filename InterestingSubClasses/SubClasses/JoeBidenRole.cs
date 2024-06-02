@@ -8,8 +8,8 @@ namespace InterestingSubClasses.SubClasses
     public class JoeBidenRole : ISCRoleAPI
     {
         public override string RoleName => "Joe Biden";
-        public override string Description => "A guard with a 20% slowness effect but enhanced firepower.";
-        public override string abilitydescription => "adds 20% slowness but also gives better firepower on spawn";
+        public override string Description => "A guard that has slowed movement but enhanced firepower";
+        public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.FacilityGuard;
         public override int MaxHealth => 150; 
         public override RoomType SpawnRoom => RoomType.EzGateB;
@@ -23,7 +23,7 @@ namespace InterestingSubClasses.SubClasses
             player.ClearInventory();
             player.AddItem(ItemType.GunLogicer);
             player.AddItem(ItemType.ArmorCombat);
-            player.AddItem(ItemType.KeycardGuard);
+            player.AddItem(ItemType.KeycardMTFOperative);
             player.AddItem(ItemType.Medkit);
             player.AddAmmo(AmmoType.Nato762, 150);
             ApplyDisabledEffect(player);
