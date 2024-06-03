@@ -7,12 +7,14 @@ namespace InterestingSubClasses.SubClasses
 {
     public class BusinessmanRole : ISCRoleAPI
     {
-        public override string RoleName => "Businessman";
-        public override string Description => "A savvy individual who generates 1 coin every 30 seconds.";
-        public override string abilitydescription => "generates 1 coin every 30 seconds";
+        public override string RoleName => Plugin.Instance._translations.BusinessmanRoleName;
+        public override string Description => Plugin.Instance._translations.BusinessmanDescription;
+        public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.Scientist;
         public override int MaxHealth => 100;
         public override RoomType SpawnRoom => RoomType.LczGlassBox;
+        public override float SpawnChance => Plugin.Instance.Config.BusinessmanSpawnChance;
+        public override int MaxCount => Plugin.Instance.Config.BusinessmanMaxCount;
 
         public override void AddRole(Player player)
         {
@@ -30,3 +32,4 @@ namespace InterestingSubClasses.SubClasses
         }
     }
 }
+

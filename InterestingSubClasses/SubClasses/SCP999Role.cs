@@ -2,6 +2,8 @@ using Exiled.API.Enums;
 using Exiled.API.Features;
 using Exiled.API.Features.Doors;
 using Exiled.Events.EventArgs.Player;
+using Exiled.Events.EventArgs.Scp096;
+using Exiled.Events.EventArgs.Scp173;
 using Exiled.Events.EventArgs.Scp330;
 using MEC;
 using PlayerRoles;
@@ -13,27 +15,40 @@ namespace InterestingSubClasses.SubClasses
 {
     public class SCP999Role : ISCRoleAPI
     {
-        public override string RoleName => "SCP-999";
-        public override string Description => "A friendly SCP that provides passive regeneration to nearby players and can pickup 20 pieces of candy";
+        public override string RoleName => Plugin.Instance._translations.SCP999RoleName;
+        public override string Description => Plugin.Instance._translations.SCP999Description;
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.Tutorial;
         public override int MaxHealth => 999;
-        public override RoomType SpawnRoom => RoomType.Lcz330;
+        public override RoomType SpawnRoom => RoomType.LczCafe;
+        public override float SpawnChance => Plugin.Instance.Config.SCP999SpawnChance;
+        public override int MaxCount => Plugin.Instance.Config.SCP999MaxCount;
 
         public override void AddRole(Player player)
         {
             base.AddRole(player);
+            ApplyDisabledEffect(player);
             Plugin.Instance.activeCoroutines[player] = Timing.RunCoroutine(RegenerationCoroutine(player));
-            player.Scale = new Vector3(1.2f, 0.9f, 1.3f);
+            player.Scale = new Vector3(1.1f, 0.9f, 1.3f);
+            player.IsGodModeEnabled = true;
             player.AddItem(ItemType.KeycardResearchCoordinator);
-            Door lczdoor = Door.Get(DoorType.Scp330Chamber);
-            lczdoor.IsOpen = true;
+        }
+
+        private void ApplyDisabledEffect(Player player)
+        {
+            player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
+        }
+
+        private void RemoveDisabledEffect(Player player)
+        {
+            player.DisableEffect<CustomPlayerEffects.Disabled>();
         }
 
         public override void RemoveRole(Player player)
         {
             base.RemoveRole(player);
-            player.Scale = new Vector3(1.0f, 1.0f, 1.0f);
+            RemoveDisabledEffect(player);
+            player.Scale = Plugin.Instance.Config.size999;
         }
 
         protected override void SubscribeEvents()
@@ -96,3 +111,4 @@ namespace InterestingSubClasses.SubClasses
         }
     }
 }
+

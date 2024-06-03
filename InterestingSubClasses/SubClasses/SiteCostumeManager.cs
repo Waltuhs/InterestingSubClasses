@@ -11,12 +11,14 @@ namespace InterestingSubClasses.SubClasses
 {
     public class SiteCostumeManager : ISCRoleAPI
     {
-        public override string RoleName => "Site Costume Manager";
-        public override string Description => "Can disguise all people in the same room as him as scientists for a minute.";
-        public override string abilitydescription => "Press ALT to disguise everyone in the room your in as a scientist";
+        public override string RoleName => Plugin.Instance._translations.SiteCostumeManagerRoleName;
+        public override string Description => Plugin.Instance._translations.SiteCostumeManagerDescription;
+        public override string abilitydescription => Plugin.Instance._translations.SiteCostumeManagerAbilityDescription;
         public override RoleTypeId RoleType => RoleTypeId.Scientist; 
         public override int MaxHealth => 100;
         public override RoomType SpawnRoom => RoomType.Lcz914;
+        public override float SpawnChance => Plugin.Instance.Config.SiteCostumeManagerSpawnChance;
+        public override int MaxCount => Plugin.Instance.Config.SiteCostumeManagerMaxCount;
         private readonly Dictionary<Player, RoleTypeId> originalAppearances = new Dictionary<Player, RoleTypeId>();
         private bool isCooldown = false;
 

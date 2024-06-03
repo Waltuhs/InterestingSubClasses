@@ -16,26 +16,30 @@ namespace InterestingSubClasses
         public abstract RoleTypeId RoleType { get; }
         public abstract int MaxHealth { get; }
         public abstract RoomType SpawnRoom { get; }
+        public abstract float SpawnChance { get; }
+        public abstract int MaxCount { get; }
 
         public virtual void AddRole(Player player)
         {
-            Log.Info($"Setting role {RoleName} for player {player.Nickname}.");
             Plugin.Instance.customRoles[player] = RoleName;
             player.Role.Set(RoleType);
             player.Health = MaxHealth;
             player.MaxHealth = MaxHealth;
             player.CustomInfo = RoleName;
             player.Teleport(SpawnRoom);
-            player.ShowHint($"\n\nYou've been set to\n{RoleName}\n{Description}\n{abilitydescription}", 5);
-            Exiled.Events.Handlers.Player.Died += OnPlayerDied;
-            Exiled.Events.Handlers.Server.EndingRound += OnRoundEnded;
-            Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
-            SubscribeEvents();
+            if (Plugin.Instance.Config.Broadcasts == false)
+            {
+                player.ShowHint($"\n\nYou've been set to\n{RoleName}\n{Description}\n{abilitydescription}", 5);
+            }
+            else
+            {
+                player.Broadcast(5, $"\n\nYou've been set to\n{RoleName}\n{Description}\n{abilitydescription}");
+            }
+            SubscribeToEvents();
         }
 
         public virtual void RemoveRole(Player player)
         {
-            Log.Info($"Removing role {RoleName} from player {player.Nickname}.");
             if (Plugin.Instance.customRoles.ContainsKey(player))
             {
                 Plugin.Instance.customRoles.Remove(player);
@@ -45,28 +49,40 @@ namespace InterestingSubClasses
                     Plugin.Instance.activeCoroutines.Remove(player);
                 }
             }
-            UnsubscribeEvents();
+            UnsubscribeFromEvents();
         }
 
         private void OnPlayerDied(DiedEventArgs ev)
         {
             RemoveRole(ev.Player);
+            UnsubscribeFromEvents();
         }
 
         private void OnRoundEnded(EndingRoundEventArgs ev)
         {
-            UnsubscribeEvents();
+            UnsubscribeFromEvents();
         }
 
-        private void OnRoundStarted()
+        private void OnChangingRole(ChangingRoleEventArgs ev)
         {
-            var players = Player.List.ToList();
-            if (players.Count == 0)
-                return;
+            RemoveRole(ev.Player);
+            UnsubscribeFromEvents();
+        }
 
-            var randomPlayer = players[UnityEngine.Random.Range(0, players.Count)];
-            Log.Info($"Assigning role {RoleName} to random player {randomPlayer.Nickname} at round start.");
-            AddRole(randomPlayer);
+        private void SubscribeToEvents()
+        {
+            Exiled.Events.Handlers.Player.Died += OnPlayerDied;
+            Exiled.Events.Handlers.Server.EndingRound += OnRoundEnded;
+            Exiled.Events.Handlers.Player.ChangingRole += OnChangingRole;
+            SubscribeEvents();
+        }
+
+        private void UnsubscribeFromEvents()
+        {
+            Exiled.Events.Handlers.Player.Died -= OnPlayerDied;
+            Exiled.Events.Handlers.Server.EndingRound -= OnRoundEnded;
+            Exiled.Events.Handlers.Player.ChangingRole -= OnChangingRole;
+            UnsubscribeEvents();
         }
 
         protected virtual void SubscribeEvents() { }

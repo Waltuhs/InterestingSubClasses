@@ -7,12 +7,14 @@ namespace InterestingSubClasses.SubClasses
 {
     public class JoeBidenRole : ISCRoleAPI
     {
-        public override string RoleName => "Joe Biden";
-        public override string Description => "A guard that has slowed movement but enhanced firepower";
+        public override string RoleName => Plugin.Instance._translations.JoeBidenRoleName;
+        public override string Description => Plugin.Instance._translations.JoeBidenDescription;
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.FacilityGuard;
         public override int MaxHealth => 150; 
         public override RoomType SpawnRoom => RoomType.EzGateB;
+        public override float SpawnChance => Plugin.Instance.Config.JoeBidenSpawnChance;
+        public override int MaxCount => Plugin.Instance.Config.JoeBidenMaxCount;
         private Vector3 spawnPosition = new Vector3(21.445f, 991.882f, -35.211f);
 
         public override void AddRole(Player player)

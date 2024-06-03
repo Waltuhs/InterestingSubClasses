@@ -9,11 +9,14 @@ ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game w
 | |  |
 | --- | --- |
 | Business man | a scientist that spawns in gr-18 that generates 1 coin every 30 seconds |
-| ClassD informer | A classd who gets updates via a hint of the warhead status, Foundation forces and scps that remain alive |
+| ClassD informer | A classd who gets updates via a hint OR broadcast (config) of the warhead status, Foundation forces and scps that remain alive |
 | JoeBiden | A guard that has slowed movement but enhanced firepower (yes him spawning in front of stairs was a intended feature) |
-| Kid | A short d class that spawns in SCP-330 and can pick up 5 candies |
-| SCP-999 | A tutorial that spawns in scp-330 also provides passive regeneration to nearby players and can pickup 20 pieces of candy |
+| Kid | A short classD with more stamina and can pick up 5 candies |
+| SCP-999 | A friendly SCP that provides passive regeneration to nearby players, can pickup 20 pieces of candy, able to HEAR scps and slightly slowed movement |
 | Site Costume Manager | A scientist that can disguise all people in the same room as him as scientists for a minute by pressing ALT (has a 2 minute cooldown) |
+
+### SubClass picking system
+by default there is a 50 percent chance and 1 max player able to be picked to be a subclass at the start of a round. (all adjustable in config)
 
 ### Config
 ```yml
@@ -22,25 +25,80 @@ ISC:
   is_enabled: true
   # is Debug mode enabled?
   debug: false
-  # The minimum number of players required to enable subclasses.
+  # Minimum number of players required for subclasses to be enabled
   min_players_for_subclasses: 4
-  # Is the business man SubClass enabled?
-  businessman_role_enabled: true
-  # Is the Informer SubClass enabled?
-  informer_role_enabled: true
-  # Is the JoeBiden SubClass enabled?
-  joe_biden_role_enabled: true
-  # Is the Kid SubClass enabled?
-  kid_role_enabled: true
-  # Is the SCP999 SubClass enabled?
+  # Enable or disable SCP-999 role
   s_c_p999_role_enabled: true
-  # Is the SiteCostumeManager SubClass enabled?
+  # The spawn chance for SCP-999 role (0.0 to 1.0) (0.50 = 50%)
+  s_c_p999_spawn_chance: 0.5
+  # The maximum number of players that can be assigned the SCP-999 role
+  s_c_p999_max_count: 1
+  # Enable or disable Kid role
+  kid_role_enabled: true
+  # The spawn chance for Kid role (0.0 to 1.0) (0.50 = 50%)
+  kid_spawn_chance: 0.5
+  # The maximum number of players that can be assigned the Kid role
+  kid_max_count: 1
+  # Enable or disable Site Costume Manager role
   site_costume_manager_role_enabled: true
+  # The spawn chance for Site Costume Manager role (0.0 to 1.0) (0.50 = 50%)
+  site_costume_manager_spawn_chance: 0.5
+  # The maximum number of players that can be assigned the Site Costume Manager role
+  site_costume_manager_max_count: 1
+  # Enable or disable Joe Biden role
+  joe_biden_role_enabled: true
+  # The spawn chance for Joe Biden role (0.0 to 1.0) (0.50 = 50%)
+  joe_biden_spawn_chance: 0.5
+  # The maximum number of players that can be assigned the Joe Biden role
+  joe_biden_max_count: 1
+  # Enable or disable Businessman role
+  businessman_role_enabled: true
+  # The spawn chance for Businessman role (0.0 to 1.0) (0.50 = 50%)
+  businessman_spawn_chance: 0.5
+  # The maximum number of players that can be assigned the Businessman role
+  businessman_max_count: 1
+  # Enable or disable Informer role
+  informer_role_enabled: true
+  # The spawn chance for Informer role (0.0 to 1.0) (0.50 = 50%)
+  informer_spawn_chance: 0.5
+  # The maximum number of players that can be assigned the Informer role
+  informer_max_count: 1
+  # Should hints be broadcasts instead?
+  broadcasts: false
+  # Kid size
+  kid_size:
+    x: 1.1
+    y: 0.8
+    z: 1.1
+  # SCP-999 size
+  size999:
+    x: 1.1
+    y: 0.9
+    z: 1.3
 ```
 
-### SubClass picking system
-A maximum of 1 person can spawn as specific subclass e.g one kid, one business man, one informer etc etc
-(this is planned to be adjustable in config)
+### Translations
+```yml
+ISC:
+  site_costume_manager_role_name: 'Site Costume Manager'
+  site_costume_manager_description: 'Can disguise all people in the same room as him as scientists for a minute.'
+  site_costume_manager_ability_description: 'Press ALT to disguise everyone in the room you''re in as a scientist'
+  s_c_p999_role_name: 'SCP-999'
+  s_c_p999_description: 'A friendly SCP that provides passive regeneration to nearby players, can pickup 20 pieces of candy, able to HEAR scps and slightly slowed movement.'
+  the_kid_role_name: 'The Kid'
+  the_kid_description: 'A short classD with more stamina and can pick up 5 candies.'
+  joe_biden_role_name: 'Joe Biden'
+  joe_biden_description: 'A guard that has slowed movement but enhanced firepower.'
+  class_d_informer_role_name: 'ClassD Informer'
+  class_d_informer_description: 'A Class-D personnel with access to critical information.'
+  class_d_informer_ability_description: 'Receives constant updates on the status of the warhead, SCPs, and NTF remaining.'
+  businessman_role_name: 'Businessman'
+  businessman_description: 'A savvy individual who generates 1 coin every 30 seconds.'
+```
+
+### SetSubClass command
+### prefix = SSC
+### description = Sets the command sender to a specified subclass
 
 ### suggestions
 please either open a issue with the suggestions tag on github OR slide me a dm on discord with your suggestion for this plugin @walter.jr.

@@ -1,5 +1,7 @@
 using Exiled.API.Features;
+using Exiled.API.Features.Roles;
 using Exiled.Events.EventArgs.Server;
+using HarmonyLib;
 using InterestingSubClasses.SubClasses;
 using MEC;
 using PlayerRoles;
@@ -9,21 +11,25 @@ using System.Linq;
 
 namespace InterestingSubClasses
 {
-    public class Plugin : Plugin<Config>
+    public class Plugin : Plugin<Config, Translations>
     {
         public static Plugin Instance { get; private set; } = null;
         public override string Author => "sexy waltuh";
         public override string Name => "InterestingSubClasses";
         public override string Prefix => "ISC";
-        public override Version Version => new Version(1, 0, 0);
-        private List<ISCRoleAPI> registeredRoles = new List<ISCRoleAPI>();
+        public override Version Version => new Version(2, 0, 0);
+        public List<ISCRoleAPI> registeredRoles = new List<ISCRoleAPI>();
         public Dictionary<Player, string> customRoles = new Dictionary<Player, string>();
         public Dictionary<Player, CoroutineHandle> activeCoroutines = new Dictionary<Player, CoroutineHandle>();
         public Dictionary<Player, int> scp330PickupCount = new Dictionary<Player, int>();
+        public Translations _translations = new Translations();
+        private Harmony _harmony;
 
         public override void OnEnabled()
         {
             Instance = this;
+            _harmony = new Harmony($"com.{Author}.{Name}");
+            _harmony.PatchAll();
             ServerConsole.AddLog("[ISC] Registering roles...", ConsoleColor.DarkBlue);
             if (Config.SCP999RoleEnabled)
             {
@@ -41,7 +47,7 @@ namespace InterestingSubClasses
             {
                 RegisterRole(new JoeBidenRole());
             }
-            if (Config.businessmanRoleEnabled)
+            if (Config.BusinessmanRoleEnabled)
             {
                 RegisterRole(new BusinessmanRole());
             }
@@ -57,9 +63,10 @@ namespace InterestingSubClasses
 
         public override void OnDisabled()
         {
+            Instance = null;
+            _harmony.UnpatchAll($"com.{Author}.{Name}");
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Server.EndingRound -= OnRoundEnded;
-            Instance = null;
             base.OnDisabled();
         }
 
@@ -73,45 +80,50 @@ namespace InterestingSubClasses
         {
             if (Player.List.Count() < Config.MinPlayersForSubclasses)
             {
-                ServerConsole.AddLog("<color=red>[ISC]</color> Not enough players to enable subclasses.", ConsoleColor.Red);
+                ServerConsole.AddLog("[ISC] Not enough players to enable subclasses.", ConsoleColor.Red);
                 return;
             }
 
             var availablePlayers = Player.List.ToList();
-            var assignedRoles = new HashSet<Player>();
+            var assignedRoles = new Dictionary<ISCRoleAPI, int>();
 
             foreach (var role in registeredRoles)
             {
-                var roleAssigned = false;
+                assignedRoles[role] = 0;
+            }
+
+            foreach (var role in registeredRoles)
+            {
                 var shuffledPlayers = availablePlayers.OrderBy(_ => UnityEngine.Random.value).ToList();
 
                 foreach (var player in shuffledPlayers)
                 {
-                    if (assignedRoles.Contains(player))
-                        continue;
+                    if (assignedRoles[role] >= role.MaxCount)
+                        break;
 
-                    if (CanAssignRole(player, role.RoleType))
+                    if (CanAssignRole(player, role.RoleType) && UnityEngine.Random.value <= role.SpawnChance)
                     {
                         role.AddRole(player);
-                        assignedRoles.Add(player);
-                        roleAssigned = true;
-                        break;
+                        assignedRoles[role]++;
+                        availablePlayers.Remove(player);
                     }
                 }
-
-                if (!roleAssigned)
-                {
-                    ServerConsole.AddLog($"<color=red>[ISC]</color> No suitable player found for role {role.RoleName}.", ConsoleColor.Yellow);
-                }
             }
-            var classDPlayersWithoutRoles = availablePlayers
-                .Where(p => p.Role == RoleTypeId.ClassD && !assignedRoles.Contains(p))
-                .ToList();
 
-            if (classDPlayersWithoutRoles.Count > 2 && Config.SCP999RoleEnabled)
+            if (Config.SCP999RoleEnabled)
             {
-                var randomClassD = classDPlayersWithoutRoles[UnityEngine.Random.Range(0, classDPlayersWithoutRoles.Count)];
-                registeredRoles.OfType<SCP999Role>().FirstOrDefault()?.AddRole(randomClassD);
+                var classDPlayersWithoutRoles = availablePlayers
+                    .Where(p => p.Role == RoleTypeId.ClassD)
+                    .ToList();
+
+                if (classDPlayersWithoutRoles.Count > 2 && assignedRoles[registeredRoles.OfType<SCP999Role>().FirstOrDefault()] < Config.SCP999MaxCount)
+                {
+                    var randomClassD = classDPlayersWithoutRoles[UnityEngine.Random.Range(0, classDPlayersWithoutRoles.Count)];
+                    if (UnityEngine.Random.value <= Config.SCP999SpawnChance)
+                    {
+                        registeredRoles.OfType<SCP999Role>().FirstOrDefault()?.AddRole(randomClassD);
+                    }
+                }
             }
         }
 

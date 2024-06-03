@@ -8,23 +8,29 @@ namespace InterestingSubClasses.SubClasses
 {
     public class KidRole : ISCRoleAPI
     {
-        public override string RoleName => "The Kid";
-        public override string Description => "A kid that spawns in SCP-330 and can pick up 5 candies";
+        public override string RoleName => Plugin.Instance._translations.TheKidRoleName;
+        public override string Description => Plugin.Instance._translations.TheKidDescription;
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.ClassD;
         public override int MaxHealth => 85;
-        public override RoomType SpawnRoom => RoomType.Lcz330;
+        public override RoomType SpawnRoom => RoomType.LczToilets;
+        public override float SpawnChance => Plugin.Instance.Config.KidSpawnChance;
+        public override int MaxCount => Plugin.Instance.Config.KidMaxCount;
+
+        private const float StaminaMultiplier = 1.2f; 
 
         public override void AddRole(Player player)
         {
             base.AddRole(player);
-            player.Scale = new Vector3(1.1f, 0.8f, 1.1f);
+            player.Scale = Plugin.Instance.Config.KidSize;
+            player.Stamina *= StaminaMultiplier;
         }
 
         public override void RemoveRole(Player player)
         {
             base.RemoveRole(player);
             player.Scale = new Vector3(1.0f, 1.0f, 1.0f);
+            player.Stamina /= StaminaMultiplier; 
         }
 
         protected override void SubscribeEvents()
