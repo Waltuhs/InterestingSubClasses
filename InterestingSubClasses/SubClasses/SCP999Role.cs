@@ -1,15 +1,15 @@
 using Exiled.API.Enums;
 using Exiled.API.Features;
-using Exiled.API.Features.Doors;
 using Exiled.Events.EventArgs.Player;
-using Exiled.Events.EventArgs.Scp096;
-using Exiled.Events.EventArgs.Scp173;
-using Exiled.Events.EventArgs.Scp330;
 using MEC;
 using PlayerRoles;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using MapEditorReborn.API.Features.Objects;
+using MapEditorReborn.API.Features.Components;
+using Exiled.Events.EventArgs;
+using Exiled.Events.EventArgs.Scp330;
 
 namespace InterestingSubClasses.SubClasses
 {
@@ -101,13 +101,26 @@ namespace InterestingSubClasses.SubClasses
                 var nearbyPlayers = Player.List.Where(p => Vector3.Distance(p.Position, player.Position) <= 10f);
                 foreach (var nearbyPlayer in nearbyPlayers)
                 {
+                    float distance = Vector3.Distance(nearbyPlayer.Position, player.Position);
+                    int healingAmount = GetHealingAmount(distance);
+
                     if (nearbyPlayer.Health < nearbyPlayer.MaxHealth)
                     {
-                        nearbyPlayer.Health += 1;
+                        nearbyPlayer.Health += healingAmount;
+                        if (nearbyPlayer.Health > nearbyPlayer.MaxHealth)
+                        {
+                            nearbyPlayer.Health = nearbyPlayer.MaxHealth;
+                        }
                     }
                 }
-                yield return Timing.WaitForSeconds(3f);
+                yield return Timing.WaitForSeconds(1f);
             }
+        }
+
+        private int GetHealingAmount(float distance)
+        {
+            int healingAmount = Mathf.Clamp(Mathf.RoundToInt(3 * (1 - (distance / 10))), 0, 3);
+            return healingAmount;
         }
     }
 }

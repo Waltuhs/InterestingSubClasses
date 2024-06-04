@@ -34,18 +34,13 @@ namespace InterestingSubClasses.SubClasses
         public override void RemoveRole(Player player)
         {
             base.RemoveRole(player);
-            RemoveDisabledEffect(player);
             player.Scale = new Vector3(1.0f, 1.0f, 1.0f);
         }
 
+        // remove this
         private void ApplyDisabledEffect(Player player)
         {
             player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
-        }
-
-        private void RemoveDisabledEffect(Player player)
-        {
-            player.DisableEffect<CustomPlayerEffects.Disabled>();
         }
     }
 }

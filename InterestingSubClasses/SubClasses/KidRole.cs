@@ -17,20 +17,17 @@ namespace InterestingSubClasses.SubClasses
         public override float SpawnChance => Plugin.Instance.Config.KidSpawnChance;
         public override int MaxCount => Plugin.Instance.Config.KidMaxCount;
 
-        private const float StaminaMultiplier = 1.2f; 
-
         public override void AddRole(Player player)
         {
             base.AddRole(player);
             player.Scale = Plugin.Instance.Config.KidSize;
-            player.Stamina *= StaminaMultiplier;
+            player.EnableEffect<CustomPlayerEffects.MovementBoost>(10, 0);
         }
 
         public override void RemoveRole(Player player)
         {
             base.RemoveRole(player);
             player.Scale = new Vector3(1.0f, 1.0f, 1.0f);
-            player.Stamina /= StaminaMultiplier; 
         }
 
         protected override void SubscribeEvents()

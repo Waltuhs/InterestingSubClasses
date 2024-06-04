@@ -69,6 +69,24 @@ namespace InterestingSubClasses
         [Description("The maximum number of players that can be assigned the Informer role")]
         public int InformerMaxCount { get; set; } = 1;
 
+        [Description("Enable or disable Ghost role")]
+        public bool GhostRoleEnabled { get; set; } = true;
+
+        [Description("The spawn chance for Ghost role (0.0 to 1.0) (0.50 = 50%)")]
+        public float GhostSpawnChance { get; set; } = 0.50f;
+
+        [Description("The maximum number of players that can be assigned the Ghost role")]
+        public int GhostMaxCount { get; set; } = 1;
+
+        [Description("Enable or disable Light Technician role")]
+        public bool LightTechnicianRoleEnabled { get; set; } = true;
+
+        [Description("The spawn chance for Light Technician role (0.0 to 1.0) (0.50 = 50%)")]
+        public float LightTechnicianSpawnChance { get; set; } = 0.50f;
+
+        [Description("The maximum number of players that can be assigned the Light Technician role")]
+        public int LightTechnicianMaxCount { get; set; } = 1;
+
         [Description("Should hints be broadcasts instead?")]
         public bool Broadcasts { get; set; } = false;
 

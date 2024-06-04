@@ -24,6 +24,8 @@ namespace InterestingSubClasses.Commands
             RegisterCommand(new SetJoeBidenCommand());
             RegisterCommand(new SetClassDInformerCommand());
             RegisterCommand(new SetBusinessmanCommand());
+            RegisterCommand(new SetGhostCommand());
+            RegisterCommand(new SetLightTechCommand());
         }
 
         protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
@@ -52,7 +54,7 @@ namespace InterestingSubClasses.Commands
                 return false;
             }
 
-            Player player = Player.Get(playerSender.ReferenceHub);
+            Player player = Player.Get(playerSender);
 
             if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.SCP999RoleName}")
             {
@@ -87,7 +89,7 @@ namespace InterestingSubClasses.Commands
                 return false;
             }
 
-            Player player = Player.Get(playerSender.ReferenceHub);
+            Player player = Player.Get(playerSender);
 
             if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.TheKidRoleName}")
             {
@@ -122,7 +124,7 @@ namespace InterestingSubClasses.Commands
                 return false;
             }
 
-            Player player = Player.Get(playerSender.ReferenceHub);
+            Player player = Player.Get(playerSender);
 
             if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.SiteCostumeManagerRoleName}")
             {
@@ -157,7 +159,7 @@ namespace InterestingSubClasses.Commands
                 return false;
             }
 
-            Player player = Player.Get(playerSender.ReferenceHub);
+            Player player = Player.Get(playerSender);
 
             if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.JoeBidenRoleName}")
             {
@@ -192,7 +194,7 @@ namespace InterestingSubClasses.Commands
                 return false;
             }
 
-            Player player = Player.Get(playerSender.ReferenceHub);
+            Player player = Player.Get(playerSender);
 
             if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.ClassDInformerRoleName}")
             {
@@ -227,7 +229,7 @@ namespace InterestingSubClasses.Commands
                 return false;
             }
 
-            Player player = Player.Get(playerSender.ReferenceHub);
+            Player player = Player.Get(playerSender);
 
             if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.BusinessmanRoleName}")
             {
@@ -247,4 +249,75 @@ namespace InterestingSubClasses.Commands
             return true;
         }
     }
+
+    public class SetGhostCommand : ICommand
+    {
+        public string Command { get; } = "Ghost";
+        public string[] Aliases { get; } = Array.Empty<string>();
+        public string Description { get; } = "Sets the Ghost SubClass for the command sender.";
+
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        {
+            if (!(sender is PlayerCommandSender playerSender))
+            {
+                response = "This command can only be run by a player";
+                return false;
+            }
+
+            Player player = Player.Get(playerSender);
+
+            if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.GhostRoleName}")
+            {
+                response = "You already have the Ghost SubClass";
+                return false;
+            }
+
+            var GhostRole = Plugin.Instance.registeredRoles.OfType<GhostRole>().FirstOrDefault();
+            if (GhostRole == null)
+            {
+                response = "Ghost role is not enabled or registered";
+                return false;
+            }
+
+            GhostRole.AddRole(player);
+            response = "You have been given the Ghost SubClass";
+            return true;
+        }
+    }
+
+    public class SetLightTechCommand : ICommand
+    {
+        public string Command { get; } = "LightTech";
+        public string[] Aliases { get; } = Array.Empty<string>();
+        public string Description { get; } = "Sets the LightTech SubClass for the command sender.";
+
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        {
+            if (!(sender is PlayerCommandSender playerSender))
+            {
+                response = "This command can only be run by a player";
+                return false;
+            }
+
+            Player player = Player.Get(playerSender);
+
+            if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.LightTechnicianRoleName}")
+            {
+                response = "You already have the LightTech SubClass";
+                return false;
+            }
+
+            var LightTechtRole = Plugin.Instance.registeredRoles.OfType<LightTechnicianRole>().FirstOrDefault();
+            if (LightTechtRole == null)
+            {
+                response = "LightTech role is not enabled or registered";
+                return false;
+            }
+
+            LightTechtRole.AddRole(player);
+            response = "You have been given the LightTech SubClass";
+            return true;
+        }
+    }
 }
+

@@ -22,12 +22,6 @@ namespace InterestingSubClasses.SubClasses
         private readonly Dictionary<Player, RoleTypeId> originalAppearances = new Dictionary<Player, RoleTypeId>();
         private bool isCooldown = false;
 
-        public override void AddRole(Player player)
-        {
-            base.AddRole(player);
-            Plugin.Instance.activeCoroutines[player] = Timing.RunCoroutine(CooldownCoroutine());
-        }
-
         protected override void SubscribeEvents()
         {
             base.SubscribeEvents();
@@ -48,11 +42,12 @@ namespace InterestingSubClasses.SubClasses
                 {
                     DisguisePlayersInRoom(ev.Player);
                     isCooldown = true;
-                    Timing.CallDelayed(60f, () => isCooldown = false);
+                    Timing.CallDelayed(120f, () => isCooldown = false);
                 }
                 else
                 {
-                    ev.Player.Broadcast(1, "ability under cooldown \n default cooldown = 120 seconds");
+                    string message = Plugin.Instance.Translation.SiteCostumeManagerAbilityCooldown.Replace("%n%", "\n");
+                    ev.Player.Broadcast(1, message);
                 }
             }
         }
@@ -85,15 +80,6 @@ namespace InterestingSubClasses.SubClasses
                 }
             }
             originalAppearances.Clear();
-        }
-
-        private IEnumerator<float> CooldownCoroutine()
-        {
-            yield return Timing.WaitForSeconds(120f); 
-            if (isCooldown)
-            {
-                isCooldown = false;
-            }
         }
     }
 }
