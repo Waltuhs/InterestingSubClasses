@@ -12,15 +12,17 @@ namespace InterestingSubClasses.SubClasses
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.FacilityGuard;
         public override int MaxHealth => 150; 
-        public override RoomType SpawnRoom => RoomType.EzGateB;
+        public override RoomType SpawnRoom => Plugin.Instance.Config.JoeRoom;
         public override float SpawnChance => Plugin.Instance.Config.JoeBidenSpawnChance;
         public override int MaxCount => Plugin.Instance.Config.JoeBidenMaxCount;
-        private Vector3 spawnPosition = new Vector3(21.445f, 991.882f, -35.211f);
 
         public override void AddRole(Player player)
         {
             base.AddRole(player);
-            player.Position = spawnPosition;
+            if (Plugin.Instance.Config.JoeXYZEnabled)
+            {
+                player.Position = Plugin.Instance.Config.JoeXYZ;
+            }
             player.Scale = new Vector3(0.9f, 0.9f, 0.9f);
             player.ClearInventory();
             player.AddItem(ItemType.GunLogicer);
@@ -28,19 +30,13 @@ namespace InterestingSubClasses.SubClasses
             player.AddItem(ItemType.KeycardMTFOperative);
             player.AddItem(ItemType.Medkit);
             player.AddAmmo(AmmoType.Nato762, 150);
-            ApplyDisabledEffect(player);
+            player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
         }
 
         public override void RemoveRole(Player player)
         {
             base.RemoveRole(player);
             player.Scale = new Vector3(1.0f, 1.0f, 1.0f);
-        }
-
-        // remove this
-        private void ApplyDisabledEffect(Player player)
-        {
-            player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
         }
     }
 }

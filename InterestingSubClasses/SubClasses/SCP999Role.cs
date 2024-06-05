@@ -20,34 +20,27 @@ namespace InterestingSubClasses.SubClasses
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.Tutorial;
         public override int MaxHealth => 999;
-        public override RoomType SpawnRoom => RoomType.LczCafe;
+        public override RoomType SpawnRoom => Plugin.Instance.Config.SCP999Room;
         public override float SpawnChance => Plugin.Instance.Config.SCP999SpawnChance;
         public override int MaxCount => Plugin.Instance.Config.SCP999MaxCount;
 
         public override void AddRole(Player player)
         {
             base.AddRole(player);
-            ApplyDisabledEffect(player);
+            player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
             Plugin.Instance.activeCoroutines[player] = Timing.RunCoroutine(RegenerationCoroutine(player));
             player.Scale = new Vector3(1.1f, 0.9f, 1.3f);
             player.IsGodModeEnabled = true;
             player.AddItem(ItemType.KeycardResearchCoordinator);
-        }
-
-        private void ApplyDisabledEffect(Player player)
-        {
-            player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
-        }
-
-        private void RemoveDisabledEffect(Player player)
-        {
-            player.DisableEffect<CustomPlayerEffects.Disabled>();
+            if (Plugin.Instance.Config.SCP999XYZEnabled)
+            {
+                player.Position = Plugin.Instance.Config.SCP999XYZ;
+            }
         }
 
         public override void RemoveRole(Player player)
         {
             base.RemoveRole(player);
-            RemoveDisabledEffect(player);
             player.Scale = Plugin.Instance.Config.size999;
         }
 

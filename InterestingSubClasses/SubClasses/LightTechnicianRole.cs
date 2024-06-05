@@ -19,10 +19,19 @@ namespace InterestingSubClasses.SubClasses
         public override string abilitydescription => Plugin.Instance._translations.LightTechnicianAbilityDescription;
         public override RoleTypeId RoleType => RoleTypeId.FacilityGuard;
         public override int MaxHealth => 100;
-        public override RoomType SpawnRoom => RoomType.EzCafeteria;
+        public override RoomType SpawnRoom => Plugin.Instance.Config.LightTechRoom;
         public override float SpawnChance => Plugin.Instance.Config.LightTechnicianSpawnChance;
         public override int MaxCount => Plugin.Instance.Config.LightTechnicianMaxCount;
         private bool isCooldown = false;
+
+        public override void AddRole(Player player)
+        {
+            base.AddRole(player);
+            if (Plugin.Instance.Config.LightTechXYZEnabled)
+            {
+                player.Position = Plugin.Instance.Config.LightTechXYZ;
+            }
+        }
 
         protected override void SubscribeEvents()
         {

@@ -12,7 +12,7 @@ namespace InterestingSubClasses.SubClasses
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.Scientist;
         public override int MaxHealth => 100;
-        public override RoomType SpawnRoom => RoomType.LczGlassBox;
+        public override RoomType SpawnRoom => Plugin.Instance.Config.BusRoom;
         public override float SpawnChance => Plugin.Instance.Config.BusinessmanSpawnChance;
         public override int MaxCount => Plugin.Instance.Config.BusinessmanMaxCount;
 
@@ -20,6 +20,10 @@ namespace InterestingSubClasses.SubClasses
         {
             base.AddRole(player);
             Plugin.Instance.activeCoroutines[player] = Timing.RunCoroutine(GenerateCoins(player));
+            if (Plugin.Instance.Config.BusXYZEnabled)
+            {
+                player.Position = Plugin.Instance.Config.BusXYZ;
+            }
         }
 
         private IEnumerator<float> GenerateCoins(Player player)

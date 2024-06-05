@@ -17,7 +17,7 @@ namespace InterestingSubClasses
         public override string Author => "sexy waltuh";
         public override string Name => "InterestingSubClasses";
         public override string Prefix => "ISC";
-        public override Version Version => new Version(2, 0, 1);
+        public override Version Version => new Version(2, 1, 0);
         public List<ISCRoleAPI> registeredRoles = new List<ISCRoleAPI>();
         public Dictionary<Player, string> customRoles = new Dictionary<Player, string>();
         public Dictionary<Player, CoroutineHandle> activeCoroutines = new Dictionary<Player, CoroutineHandle>();
@@ -62,6 +62,14 @@ namespace InterestingSubClasses
             if (Config.LightTechnicianRoleEnabled)
             {
                 RegisterRole(new LightTechnicianRole());
+            }
+            if (Config.SCP1058RoleEnabled)
+            {
+                RegisterRole(new SCP1058Role());
+            }
+            if (Config.TelekineticDboyRoleEnabled)
+            {
+                RegisterRole(new TelekineticDboyRole());
             }
             ServerConsole.AddLog("[ISC] Roles registered.", ConsoleColor.DarkBlue);
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;

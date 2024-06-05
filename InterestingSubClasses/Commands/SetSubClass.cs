@@ -26,6 +26,8 @@ namespace InterestingSubClasses.Commands
             RegisterCommand(new SetBusinessmanCommand());
             RegisterCommand(new SetGhostCommand());
             RegisterCommand(new SetLightTechCommand());
+            RegisterCommand(new SetSCP1058Command());
+            RegisterCommand(new SetTelekineticDboyCommand());
         }
 
         protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
@@ -316,6 +318,76 @@ namespace InterestingSubClasses.Commands
 
             LightTechtRole.AddRole(player);
             response = "You have been given the LightTech SubClass";
+            return true;
+        }
+    }
+
+    public class SetSCP1058Command : ICommand
+    {
+        public string Command { get; } = "SCP1058";
+        public string[] Aliases { get; } = Array.Empty<string>();
+        public string Description { get; } = "Sets the SCP1058 SubClass for the command sender.";
+
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        {
+            if (!(sender is PlayerCommandSender playerSender))
+            {
+                response = "This command can only be run by a player";
+                return false;
+            }
+
+            Player player = Player.Get(playerSender);
+
+            if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.SCP1058RoleName}")
+            {
+                response = "You already have the SCP1058 SubClass";
+                return false;
+            }
+
+            var SCP1058Role = Plugin.Instance.registeredRoles.OfType<SCP1058Role>().FirstOrDefault();
+            if (SCP1058Role == null)
+            {
+                response = "SCP1058 role is not enabled or registered";
+                return false;
+            }
+
+            SCP1058Role.AddRole(player);
+            response = "You have been given the SCP1058 SubClass";
+            return true;
+        }
+    }
+
+    public class SetTelekineticDboyCommand : ICommand
+    {
+        public string Command { get; } = "TelekineticDboy";
+        public string[] Aliases { get; } = Array.Empty<string>();
+        public string Description { get; } = "Sets the TelekineticDboy SubClass for the command sender.";
+
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        {
+            if (!(sender is PlayerCommandSender playerSender))
+            {
+                response = "This command can only be run by a player";
+                return false;
+            }
+
+            Player player = Player.Get(playerSender);
+
+            if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.TelekineticDboyRoleName}")
+            {
+                response = "You already have the TelekineticDboy SubClass";
+                return false;
+            }
+
+            var TelekineticDboy = Plugin.Instance.registeredRoles.OfType<TelekineticDboyRole>().FirstOrDefault();
+            if (TelekineticDboy == null)
+            {
+                response = "TelekineticDboy role is not enabled or registered";
+                return false;
+            }
+
+            TelekineticDboy.AddRole(player);
+            response = "You have been given the TelekineticDboy SubClass";
             return true;
         }
     }

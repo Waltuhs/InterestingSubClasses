@@ -14,8 +14,10 @@ ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game w
 | JoeBiden | A guard that has slowed movement but enhanced firepower (yes him spawning in front of stairs was a intended feature) |
 | Kid | A short classD with more stamina and can pick up 5 candies |
 | Light Technician | A Guard with the ability to turn off lights in the room he is currently in for 20 seconds with a 120 second cooldown |
+| SCP-1058 | A ClassD which possesses uncontrollable invisibility |
 | SCP-999 | A friendly SCP that provides passive regeneration to nearby players, can pickup 20 pieces of candy, able to HEAR scps and slightly slowed movement |
 | Site Costume Manager | A scientist that can disguise all people in the same room as him as scientists for a minute by pressing ALT (has a 2 minute cooldown) |
+| Telekinetic Dboy | A ClassD that can Look at a door button and press alt to open it aslong as you have a keycard to open the door if needed and it isnt locked |
 
 ### SubClass picking system
 by default there is a 50 percent chance and 1 max player able to be picked to be a subclass at the start of a round. (all adjustable in config)
@@ -35,48 +37,150 @@ ISC:
   s_c_p999_spawn_chance: 0.5
   # The maximum number of players that can be assigned the SCP-999 role
   s_c_p999_max_count: 1
+  # SCP-999 spawn room
+  s_c_p999_room: LczCafe
+  # Whether the xyz spawn overrides the room spawn
+  s_c_p999_x_y_z_enabled: false
+  # XYZ to spawn SCP-999 at if its enabled
+  s_c_p999_x_y_z:
+    x: 9
+    y: 9
+    z: 9
   # Enable or disable Kid role
-  kid_role_enabled: false
+  kid_role_enabled: true
   # The spawn chance for Kid role (0.0 to 1.0) (0.50 = 50%)
   kid_spawn_chance: 0.5
   # The maximum number of players that can be assigned the Kid role
   kid_max_count: 1
+  # Kid spawn room
+  kid_room: LczToilets
+  # Whether the xyz spawn overrides the room spawn
+  kid_x_y_z_enabled: false
+  # XYZ to spawn Kid at if its enabled
+  kid_x_y_z:
+    x: 9
+    y: 9
+    z: 9
   # Enable or disable Site Costume Manager role
-  site_costume_manager_role_enabled: false
+  site_costume_manager_role_enabled: true
   # The spawn chance for Site Costume Manager role (0.0 to 1.0) (0.50 = 50%)
   site_costume_manager_spawn_chance: 0.5
   # The maximum number of players that can be assigned the Site Costume Manager role
   site_costume_manager_max_count: 1
+  # Costume spawn room
+  costume_room: Lcz914
+  # Whether the xyz spawn overrides the room spawn
+  costume_x_y_z_enabled: false
+  # XYZ to spawn Costume at if its enabled
+  costume_x_y_z:
+    x: 9
+    y: 9
+    z: 9
   # Enable or disable Joe Biden role
-  joe_biden_role_enabled: false
+  joe_biden_role_enabled: true
   # The spawn chance for Joe Biden role (0.0 to 1.0) (0.50 = 50%)
   joe_biden_spawn_chance: 0.5
   # The maximum number of players that can be assigned the Joe Biden role
   joe_biden_max_count: 1
+  # Joe spawn room
+  joe_room: EzGateB
+  # Whether the xyz spawn overrides the room spawn
+  joe_x_y_z_enabled: true
+  # XYZ to spawn Joe at if its enabled
+  joe_x_y_z:
+    x: 21.445
+    y: 991.882
+    z: -35.211
   # Enable or disable Businessman role
-  businessman_role_enabled: false
+  businessman_role_enabled: true
   # The spawn chance for Businessman role (0.0 to 1.0) (0.50 = 50%)
   businessman_spawn_chance: 0.5
   # The maximum number of players that can be assigned the Businessman role
   businessman_max_count: 1
+  # Businessman spawn room
+  bus_room: LczGlassBox
+  # Whether the xyz spawn overrides the room spawn
+  bus_x_y_z_enabled: false
+  # XYZ to spawn Businessman at if its enabled
+  bus_x_y_z:
+    x: 9
+    y: 9
+    z: 9
   # Enable or disable Informer role
-  informer_role_enabled: false
+  informer_role_enabled: true
   # The spawn chance for Informer role (0.0 to 1.0) (0.50 = 50%)
   informer_spawn_chance: 0.5
   # The maximum number of players that can be assigned the Informer role
   informer_max_count: 1
+  # Informer spawn room
+  informer_room: LczClassDSpawn
+  # Whether the xyz spawn overrides the room spawn
+  informer_x_y_z_enabled: false
+  # XYZ to spawn Informer at if its enabled
+  informer_x_y_z:
+    x: 9
+    y: 9
+    z: 9
   # Enable or disable Ghost role
   ghost_role_enabled: true
   # The spawn chance for Ghost role (0.0 to 1.0) (0.50 = 50%)
   ghost_spawn_chance: 0.5
   # The maximum number of players that can be assigned the Ghost role
   ghost_max_count: 1
+  # Ghost spawn room
+  ghost_room: LczClassDSpawn
+  # Whether the xyz spawn overrides the room spawn
+  ghost_x_y_z_enabled: false
+  # XYZ to spawn Ghost at if its enabled
+  ghost_x_y_z:
+    x: 9
+    y: 9
+    z: 9
   # Enable or disable Light Technician role
   light_technician_role_enabled: true
   # The spawn chance for Light Technician role (0.0 to 1.0) (0.50 = 50%)
   light_technician_spawn_chance: 0.5
   # The maximum number of players that can be assigned the Light Technician role
   light_technician_max_count: 1
+  # LightTech spawn room
+  light_tech_room: EzCafeteria
+  # Whether the xyz spawn overrides the room spawn
+  light_tech_x_y_z_enabled: false
+  # XYZ to spawn LightTech at if its enabled
+  light_tech_x_y_z:
+    x: 9
+    y: 9
+    z: 9
+  # Enable or disable SCP1058 role
+  s_c_p1058_role_enabled: true
+  # The spawn chance for SCP1058 role (0.0 to 1.0) (0.50 = 50%)
+  s_c_p1058_spawn_chance: 0.5
+  # The maximum number of players that can be assigned the SCP1058 role
+  s_c_p1058_max_count: 1
+  # SCP1058 spawn room
+  s_c_p1058_room: LczClassDSpawn
+  # Whether the xyz spawn overrides the room spawn
+  s_c_p1058_x_y_z_enabled: false
+  # XYZ to spawn SCP1058 at if its enabled
+  s_c_p1058_x_y_z:
+    x: 9
+    y: 9
+    z: 9
+  # Enable or disable TelekineticDboy role
+  telekinetic_dboy_role_enabled: true
+  # The spawn chance for TelekineticDboy role (0.0 to 1.0) (0.50 = 50%)
+  telekinetic_dboy_spawn_chance: 0.5
+  # The maximum number of players that can be assigned the TelekineticDboy role
+  telekinetic_dboy_max_count: 1
+  # TelekineticDboy spawn room
+  telekinetic_dboy_room: LczClassDSpawn
+  # Whether the xyz spawn overrides the room spawn
+  telekinetic_dboy_x_y_z_enabled: false
+  # XYZ to spawn TelekineticDboy at if its enabled
+  telekinetic_dboy_x_y_z:
+    x: 9
+    y: 9
+    z: 9
   # Should hints be broadcasts instead?
   broadcasts: false
   # Kid size
@@ -94,6 +198,7 @@ ISC:
 ### Translations
 ```yml
 ISC:
+  sub_class_spawn_hint: 'You've been set to'
   site_costume_manager_role_name: 'Site Costume Manager'
   site_costume_manager_description: 'Can disguise all people in the same room as him as scientists for a minute'
   site_costume_manager_ability_description: 'Press ALT to disguise everyone in the room you''re in as a scientist'
@@ -117,6 +222,13 @@ ISC:
   light_technician_description: 'A Guard with the ability to turn off lights in the next 5 or less rooms'
   light_technician_ability_description: 'Press ALT to be able to turn off lights in your current room with a 200 second cooldown'
   light_technician_ability_cooldown: 'ability under cooldown %n% default cooldown = 120 seconds'
+  s_c_p1058_role_name: 'SCP-1058'
+  s_c_p1058_description: 'A ClassD which possesses uncontrollable invisibility'
+  s_c_p1058_invisible_message: 'You''re invisible! Remaining invisibility time: %time% seconds'
+  telekinetic_dboy_role_name: 'Telekinetic Dboy'
+  telekinetic_dboy_description: 'A Dboy that can open a door at any range'
+  telekinetic_dboy_ability_description: 'Look at a door button and press alt to open it aslong as you have a keycard to open the door if needed and it isnt locked'
+  telekinetic_dboy_ability_denied: 'Access Denied'
 ```
 
 ### SetSubClass command

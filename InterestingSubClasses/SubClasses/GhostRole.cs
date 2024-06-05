@@ -18,7 +18,7 @@ namespace InterestingSubClasses.SubClasses
         public override string abilitydescription => Plugin.Instance._translations.GhostAbilityDescription;
         public override RoleTypeId RoleType => RoleTypeId.ClassD;
         public override int MaxHealth => 100;
-        public override RoomType SpawnRoom => RoomType.LczClassDSpawn;
+        public override RoomType SpawnRoom => Plugin.Instance.Config.GhostRoom;
         public override float SpawnChance => Plugin.Instance.Config.GhostSpawnChance;
         public override int MaxCount => Plugin.Instance.Config.GhostMaxCount;
         private bool isCooldown = false;
@@ -27,6 +27,10 @@ namespace InterestingSubClasses.SubClasses
         {
             base.AddRole(player);
             player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
+            if (Plugin.Instance.Config.GhostXYZEnabled)
+            {
+                player.Position = Plugin.Instance.Config.GhostXYZ;
+            }
         }
 
         protected override void SubscribeEvents()
@@ -47,7 +51,7 @@ namespace InterestingSubClasses.SubClasses
             {
                 if (isCooldown == false)
                 {
-                    GiveGhostly(ev.Player);
+                    ev.Player.EnableEffect<CustomPlayerEffects.Ghostly>(255, 10);
                     isCooldown = true;
                     Timing.CallDelayed(90f, () => isCooldown = false);
                 }
@@ -57,11 +61,6 @@ namespace InterestingSubClasses.SubClasses
                     ev.Player.Broadcast(1, message);
                 }
             }
-        }
-
-        private void GiveGhostly(Player player) 
-        {
-            player.EnableEffect<CustomPlayerEffects.Ghostly>(255, 10);
         }
     }
 }

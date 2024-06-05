@@ -29,11 +29,11 @@ namespace InterestingSubClasses
             player.Teleport(SpawnRoom);
             if (Plugin.Instance.Config.Broadcasts == false)
             {
-                player.ShowHint($"\n\nYou've been set to\n{RoleName}\n{Description}\n{abilitydescription}", 5);
+                player.ShowHint($"\n\n{Plugin.Instance.Translation.SubClassSpawnHint}\n{RoleName}\n{Description}\n{abilitydescription}", 5);
             }
             else
             {
-                player.Broadcast(5, $"\n\nYou've been set to\n{RoleName}\n{Description}\n{abilitydescription}");
+                player.Broadcast(5, $"\n\n{Plugin.Instance.Translation.SubClassSpawnHint}\n{RoleName}\n{Description}\n{abilitydescription}");
             }
             SubscribeToEvents();
         }

@@ -16,11 +16,20 @@ namespace InterestingSubClasses.SubClasses
         public override string abilitydescription => Plugin.Instance._translations.SiteCostumeManagerAbilityDescription;
         public override RoleTypeId RoleType => RoleTypeId.Scientist; 
         public override int MaxHealth => 100;
-        public override RoomType SpawnRoom => RoomType.Lcz914;
+        public override RoomType SpawnRoom => Plugin.Instance.Config.CostumeRoom;
         public override float SpawnChance => Plugin.Instance.Config.SiteCostumeManagerSpawnChance;
         public override int MaxCount => Plugin.Instance.Config.SiteCostumeManagerMaxCount;
-        private readonly Dictionary<Player, RoleTypeId> originalAppearances = new Dictionary<Player, RoleTypeId>();
+        private Dictionary<Player, RoleTypeId> originalAppearances = new Dictionary<Player, RoleTypeId>();
         private bool isCooldown = false;
+
+        public override void AddRole(Player player)
+        {
+            base.AddRole(player);
+            if (Plugin.Instance.Config.CostumeXYZEnabled)
+            {
+                player.Position = Plugin.Instance.Config.CostumeXYZ;
+            }
+        }
 
         protected override void SubscribeEvents()
         {

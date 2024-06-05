@@ -16,7 +16,7 @@ namespace InterestingSubClasses.SubClasses
         public override string abilitydescription => Plugin.Instance._translations.ClassDInformerAbilityDescription;
         public override RoleTypeId RoleType => RoleTypeId.ClassD;
         public override int MaxHealth => 100;
-        public override RoomType SpawnRoom => RoomType.LczClassDSpawn;
+        public override RoomType SpawnRoom => Plugin.Instance.Config.InformerRoom;
         public override float SpawnChance => Plugin.Instance.Config.InformerSpawnChance;
         public override int MaxCount => Plugin.Instance.Config.InformerMaxCount;
 
@@ -24,6 +24,10 @@ namespace InterestingSubClasses.SubClasses
         {
             base.AddRole(player);
             Plugin.Instance.activeCoroutines[player] = Timing.RunCoroutine(HintStatus(player));
+            if (Plugin.Instance.Config.InformerXYZEnabled)
+            {
+                player.Position = Plugin.Instance.Config.InformerXYZ;
+            }
         }
 
         private IEnumerator<float> HintStatus(Player player)

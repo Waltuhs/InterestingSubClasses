@@ -13,7 +13,7 @@ namespace InterestingSubClasses.SubClasses
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.ClassD;
         public override int MaxHealth => 85;
-        public override RoomType SpawnRoom => RoomType.LczToilets;
+        public override RoomType SpawnRoom => Plugin.Instance.Config.KidRoom;
         public override float SpawnChance => Plugin.Instance.Config.KidSpawnChance;
         public override int MaxCount => Plugin.Instance.Config.KidMaxCount;
 
@@ -22,8 +22,11 @@ namespace InterestingSubClasses.SubClasses
             base.AddRole(player);
             player.Scale = Plugin.Instance.Config.KidSize;
             player.EnableEffect<CustomPlayerEffects.MovementBoost>(10, 0);
+            if (Plugin.Instance.Config.KidXYZEnabled)
+            {
+                player.Position = Plugin.Instance.Config.KidXYZ;
+            }
         }
-
         public override void RemoveRole(Player player)
         {
             base.RemoveRole(player);
