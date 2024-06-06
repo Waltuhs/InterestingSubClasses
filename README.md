@@ -1,7 +1,6 @@
 # InterestingSubClasses
 ![downloads](https://img.shields.io/github/downloads/Waltuhs/InterestingSubClasses/total?logo=github&style=for-the-badge)
 ![ver](https://img.shields.io/github/v/release/Waltuhs/InterestingSubClasses?include_prereleases&logo=github&style=for-the-badge)
-[![disc](https://img.shields.io/discord/1235681501849321482?label=Discord&logo=discord&style=for-the-badge)](https://discord.gg/MQAcPFJRkR)
 
 ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game without needing Exiled.CustomRoles
 
