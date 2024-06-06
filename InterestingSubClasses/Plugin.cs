@@ -17,6 +17,7 @@ namespace InterestingSubClasses
         public override string Author => "sexy waltuh";
         public override string Name => "InterestingSubClasses";
         public override string Prefix => "ISC";
+        public override Version RequiredExiledVersion => new Version(8, 9, 2);
         public override Version Version => new Version(2, 1, 0);
         public override Version RequiredExiledVersion => new Version(8, 9, 2);
         public List<ISCRoleAPI> registeredRoles = new List<ISCRoleAPI>();
