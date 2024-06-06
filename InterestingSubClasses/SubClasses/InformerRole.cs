@@ -40,11 +40,11 @@ namespace InterestingSubClasses.SubClasses
                 var ntfRemaining = Player.List.Count(p => p.Role.Team == Team.FoundationForces);
                 if (Plugin.Instance.Config.Broadcasts == false)
                 {
-                    player.ShowHint($"\n\n\n\n\n\n\n\n\n<align=left><voffset=10><color=purple>Warhead</color>: {warheadStatus}\n<color=red>SCPs</color>: {scpsRemaining}\n<color=blue>NTF</color>: {ntfRemaining}</voffset></align>", 11);
+                    player.ShowHint($"\n\n\n\n\n\n\n\n\n<align=left><voffset=10><color=purple>{Plugin.Instance.Translation.Warhead}</color>: {warheadStatus}\n<color=red>{Plugin.Instance.Translation.Scps}</color>: {scpsRemaining}\n<color=blue>{Plugin.Instance.Translation.Ntf}</color>: {ntfRemaining}</voffset></align>", 11);
                 }
                 else
                 {
-                    player.Broadcast(11, $"<align=left><voffset=10><color=purple>Warhead</color>: {warheadStatus}\n<color=red>SCPs</color>: {scpsRemaining} <color=blue>NTF</color>: {ntfRemaining}</voffset></align>");
+                    player.Broadcast(11, $"<align=left><voffset=10><color=purple>{Plugin.Instance.Translation.Warhead}</color>: {warheadStatus}\n<color=red>{Plugin.Instance.Translation.Scps}</color>: {scpsRemaining} <color=blue>{Plugin.Instance.Translation.Ntf}</color>: {ntfRemaining}</voffset></align>");
                 }
             }
         }
