@@ -27,7 +27,7 @@ namespace InterestingSubClasses.SubClasses
         public override void AddRole(Player player)
         {
             base.AddRole(player);
-            player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
+            player.EnableEffect(EffectType.Slowness, 30, 0);
             Plugin.Instance.activeCoroutines[player] = Timing.RunCoroutine(RegenerationCoroutine(player));
             player.Scale = Plugin.Instance.Config.size999;
             player.IsGodModeEnabled = true;
