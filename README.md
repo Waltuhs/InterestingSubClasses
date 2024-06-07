@@ -4,12 +4,6 @@
 
 ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game without needing Exiled.CustomRoles
 
-I RECOMMEND YOU ACTIVATE THESE SETTINGS IN YOUR EXILED CONFIG IF YOUR GOING TO ENABLE SCP999
-can_tutorial_block_scp173: true
-can_tutorial_trigger_scp096: true
-can_scp049_sense_tutorial: true
-tutorial_not_affected_by_scp079_scan: true
-
 ### SubClasses
 | |  |
 | --- | --- |
