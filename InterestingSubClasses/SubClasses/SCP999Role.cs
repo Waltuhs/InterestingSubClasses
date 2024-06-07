@@ -41,8 +41,7 @@ namespace InterestingSubClasses.SubClasses
         public override void RemoveRole(Player player)
         {
             base.RemoveRole(player);
-            // next ver change to 1,1,1
-            player.Scale = Plugin.Instance.Config.size999;
+            player.Scale = new Vector3 (1, 1, 1);
         }
 
         protected override void SubscribeEvents()
