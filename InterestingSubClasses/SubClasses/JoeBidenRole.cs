@@ -7,8 +7,8 @@ namespace InterestingSubClasses.SubClasses
 {
     public class JoeBidenRole : ISCRoleAPI
     {
-        public override string RoleName => Plugin.Instance._translations.JoeBidenRoleName;
-        public override string Description => Plugin.Instance._translations.JoeBidenDescription;
+        public override string RoleName => Plugin.Instance.Translation.JoeBidenRoleName;
+        public override string Description => Plugin.Instance.Translation.JoeBidenDescription;
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.FacilityGuard;
         public override int MaxHealth => 150; 

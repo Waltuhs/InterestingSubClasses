@@ -15,8 +15,8 @@ namespace InterestingSubClasses.SubClasses
 {
     public class SCP999Role : ISCRoleAPI
     {
-        public override string RoleName => Plugin.Instance._translations.SCP999RoleName;
-        public override string Description => Plugin.Instance._translations.SCP999Description;
+        public override string RoleName => Plugin.Instance.Translation.SCP999RoleName;
+        public override string Description => Plugin.Instance.Translation.SCP999Description;
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.Tutorial;
         public override int MaxHealth => 999;
@@ -29,7 +29,7 @@ namespace InterestingSubClasses.SubClasses
             base.AddRole(player);
             player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
             Plugin.Instance.activeCoroutines[player] = Timing.RunCoroutine(RegenerationCoroutine(player));
-            player.Scale = new Vector3(1.1f, 0.9f, 1.3f);
+            player.Scale = Plugin.Instance.Config.size999;
             player.IsGodModeEnabled = true;
             player.AddItem(ItemType.KeycardResearchCoordinator);
             if (Plugin.Instance.Config.SCP999XYZEnabled)
@@ -41,6 +41,7 @@ namespace InterestingSubClasses.SubClasses
         public override void RemoveRole(Player player)
         {
             base.RemoveRole(player);
+            // next ver change to 1,1,1
             player.Scale = Plugin.Instance.Config.size999;
         }
 

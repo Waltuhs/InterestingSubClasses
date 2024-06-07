@@ -11,9 +11,9 @@ namespace InterestingSubClasses.SubClasses
 {
     public class InformerRole : ISCRoleAPI
     {
-        public override string RoleName => Plugin.Instance._translations.ClassDInformerRoleName;
-        public override string Description => Plugin.Instance._translations.ClassDInformerDescription;
-        public override string abilitydescription => Plugin.Instance._translations.ClassDInformerAbilityDescription;
+        public override string RoleName => Plugin.Instance.Translation.ClassDInformerRoleName;
+        public override string Description => Plugin.Instance.Translation.ClassDInformerDescription;
+        public override string abilitydescription => Plugin.Instance.Translation.ClassDInformerAbilityDescription;
         public override RoleTypeId RoleType => RoleTypeId.ClassD;
         public override int MaxHealth => 100;
         public override RoomType SpawnRoom => Plugin.Instance.Config.InformerRoom;

@@ -14,9 +14,9 @@ namespace InterestingSubClasses.SubClasses
 {
     public class LightTechnicianRole : ISCRoleAPI
     {
-        public override string RoleName => Plugin.Instance._translations.LightTechnicianRoleName;
-        public override string Description => Plugin.Instance._translations.LightTechnicianDescription;
-        public override string abilitydescription => Plugin.Instance._translations.LightTechnicianAbilityDescription;
+        public override string RoleName => Plugin.Instance.Translation.LightTechnicianRoleName;
+        public override string Description => Plugin.Instance.Translation.LightTechnicianDescription;
+        public override string abilitydescription => Plugin.Instance.Translation.LightTechnicianAbilityDescription;
         public override RoleTypeId RoleType => RoleTypeId.FacilityGuard;
         public override int MaxHealth => 100;
         public override RoomType SpawnRoom => Plugin.Instance.Config.LightTechRoom;

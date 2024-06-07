@@ -8,8 +8,8 @@ namespace InterestingSubClasses.SubClasses
 {
     public class KidRole : ISCRoleAPI
     {
-        public override string RoleName => Plugin.Instance._translations.TheKidRoleName;
-        public override string Description => Plugin.Instance._translations.TheKidDescription;
+        public override string RoleName => Plugin.Instance.Translation.TheKidRoleName;
+        public override string Description => Plugin.Instance.Translation.TheKidDescription;
         public override string abilitydescription => "";
         public override RoleTypeId RoleType => RoleTypeId.ClassD;
         public override int MaxHealth => 85;

@@ -13,9 +13,9 @@ namespace InterestingSubClasses.SubClasses
 {
     public class GhostRole : ISCRoleAPI
     {
-        public override string RoleName => Plugin.Instance._translations.GhostRoleName;
-        public override string Description => Plugin.Instance._translations.GhostDescription;
-        public override string abilitydescription => Plugin.Instance._translations.GhostAbilityDescription;
+        public override string RoleName => Plugin.Instance.Translation.GhostRoleName;
+        public override string Description => Plugin.Instance.Translation.GhostDescription;
+        public override string abilitydescription => Plugin.Instance.Translation.GhostAbilityDescription;
         public override RoleTypeId RoleType => RoleTypeId.ClassD;
         public override int MaxHealth => 100;
         public override RoomType SpawnRoom => Plugin.Instance.Config.GhostRoom;

@@ -11,9 +11,9 @@ namespace InterestingSubClasses.SubClasses
 {
     public class SiteCostumeManager : ISCRoleAPI
     {
-        public override string RoleName => Plugin.Instance._translations.SiteCostumeManagerRoleName;
-        public override string Description => Plugin.Instance._translations.SiteCostumeManagerDescription;
-        public override string abilitydescription => Plugin.Instance._translations.SiteCostumeManagerAbilityDescription;
+        public override string RoleName => Plugin.Instance.Translation.SiteCostumeManagerRoleName;
+        public override string Description => Plugin.Instance.Translation.SiteCostumeManagerDescription;
+        public override string abilitydescription => Plugin.Instance.Translation.SiteCostumeManagerAbilityDescription;
         public override RoleTypeId RoleType => RoleTypeId.Scientist; 
         public override int MaxHealth => 100;
         public override RoomType SpawnRoom => Plugin.Instance.Config.CostumeRoom;
