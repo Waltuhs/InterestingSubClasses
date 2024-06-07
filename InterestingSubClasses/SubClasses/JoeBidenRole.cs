@@ -30,7 +30,7 @@ namespace InterestingSubClasses.SubClasses
             player.AddItem(ItemType.KeycardMTFOperative);
             player.AddItem(ItemType.Medkit);
             player.AddAmmo(AmmoType.Nato762, 150);
-            player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
+            player.EnableEffect(EffectType.Slowness, 25, 0);
         }
 
         public override void RemoveRole(Player player)
