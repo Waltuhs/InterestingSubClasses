@@ -26,7 +26,7 @@ namespace InterestingSubClasses.SubClasses
         public override void AddRole(Player player)
         {
             base.AddRole(player);
-            player.EnableEffect<CustomPlayerEffects.Disabled>(255, 0);
+            player.EnableEffect(EffectType.Slowness, 25, 0);
             if (Plugin.Instance.Config.GhostXYZEnabled)
             {
                 player.Position = Plugin.Instance.Config.GhostXYZ;
