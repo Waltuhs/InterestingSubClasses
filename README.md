@@ -23,7 +23,7 @@ A) the ALT "keybind" for abilities is actually just your no clip key but is alt 
 B) The command SSC (SetSubClass) will only work if you werent a subclass before using it (you can also die as a subclass then use the command perfectly fine)
 
 ### SubClass picking system
-by default there is a 50 percent chance and 1 max player able to be picked to be a subclass at the start of a round. (all adjustable in config)
+Each SubClass by default has a 50% chance of spawning and The maximum number of players that can be assigned it on round start is 1 (all adjustable in config)
 
 ### Config
 ```yml
