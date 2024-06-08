@@ -19,8 +19,8 @@ ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game w
 | Telekinetic Dboy | A ClassD that can Look at a door button and press alt to open it aslong as you have a keycard to open the door if needed and it isnt locked |
 
 ### READ BEFORE A BUG REPORT!!!
-the ALT "keybind" for abilities is actually just your no clip key but is alt by default and not many people change that so theres not point in adding confusion with labeling it the "no clip key"
-The command SSC (SetSubClass) will only work if you werent a subclass before using it (you can also die as a subclass then use the command perfectly fine)
+A) the ALT "keybind" for abilities is actually just your no clip key but is alt by default and not many people change that so theres no point in adding confusion with labeling it the "no clip key"
+B)The command SSC (SetSubClass) will only work if you werent a subclass before using it (you can also die as a subclass then use the command perfectly fine)
 
 ### SubClass picking system
 by default there is a 50 percent chance and 1 max player able to be picked to be a subclass at the start of a round. (all adjustable in config)
