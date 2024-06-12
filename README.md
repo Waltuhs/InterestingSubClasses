@@ -17,6 +17,7 @@ ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game w
 | SCP-999 | A friendly SCP that provides passive regeneration to nearby players, can pickup 20 pieces of candy, able to HEAR scps and slightly slowed movement |
 | Site Costume Manager | A scientist that can disguise all people in the same room as him as scientists for a minute by pressing ALT (has a 2 minute cooldown) |
 | Telekinetic Dboy | A ClassD that can Look at a door button and press alt to open it aslong as you have a keycard to open the door if needed and it isnt locked |
+| Warden | A Facility guard able to see through the dark and flashbangs via pressing alt with a 5 second cooldown |
 
 ### READ BEFORE A BUG REPORT!!!
 A) the ALT "keybind" for abilities is actually just your no clip key but is alt by default and not many people change that so theres no point in adding confusion with labeling it the "no clip key"
@@ -184,6 +185,21 @@ ISC:
     x: 9
     y: 9
     z: 9
+  # Enable or disable warden role
+  warden_role_enabled: true
+  # The spawn chance for warden role (0.0 to 1.0) (0.50 = 50%)
+  warden_spawn_chance: 0.5
+  # The maximum number of players that can be assigned the warden role
+  warden_max_count: 1
+  # warden spawn room
+  warden_room: LczClassDSpawn
+  # Whether the xyz spawn overrides the room spawn
+  warden_x_y_z_enabled: false
+  # XYZ to spawn warden at if its enabled
+  warden_x_y_z:
+    x: 9
+    y: 9
+    z: 9
   # Should hints be broadcasts instead?
   broadcasts: false
   # Kid size
@@ -201,29 +217,36 @@ ISC:
 ### Translations
 ```yml
 ISC:
-  sub_class_spawn_hint: 'You've been set to'
+  sub_class_spawn_hint: 'You''ve been set to'
   site_costume_manager_role_name: 'Site Costume Manager'
-  site_costume_manager_description: 'Can disguise all people in the same room as him as scientists for a minute'
+  site_costume_manager_description: 'Can disguise all people in the same room as him as scientists for a minute.'
   site_costume_manager_ability_description: 'Press ALT to disguise everyone in the room you''re in as a scientist'
   site_costume_manager_ability_cooldown: 'ability under cooldown %n% default cooldown = 120 seconds'
   s_c_p999_role_name: 'SCP-999'
-  s_c_p999_description: 'A friendly SCP that provides passive regeneration to nearby players, can pickup 20 pieces of candy, able to HEAR scps and slightly slowed movement'
+  s_c_p999_description: 'A friendly SCP that provides passive regeneration to nearby players, can pickup 20 pieces of candy, able to HEAR scps and slightly slowed movement.'
   the_kid_role_name: 'The Kid'
-  the_kid_description: 'A short classD with a speed boost and can pick up 5 candies'
+  the_kid_description: 'A short classD with more stamina and can pick up 5 candies.'
   joe_biden_role_name: 'Joe Biden'
-  joe_biden_description: 'A guard that has slowed movement but enhanced firepower'
+  joe_biden_description: 'A guard that has slowed movement but enhanced firepower.'
   class_d_informer_role_name: 'ClassD Informer'
-  class_d_informer_description: 'A Class-D personnel with access to critical information'
-  class_d_informer_ability_description: 'Receives constant updates on the status of the warhead, SCPs, and NTF remaining'
+  class_d_informer_description: 'A Class-D personnel with access to critical information.'
+  class_d_informer_ability_description: 'Receives constant updates on the status of the warhead, SCPs, and NTF remaining.'
+  warhead: 'Warhead'
+  ntf: 'NTF'
+  scps: 'SCPS'
+  armed_translation: 'Armed'
+  detonated_translation: 'Detonated'
+  in_progress_translation: 'In Progress'
+  not_armed_translation: 'Not Armed'
   businessman_role_name: 'Businessman'
-  businessman_description: 'A savvy individual who generates 1 coin every 30 seconds'
+  businessman_description: 'A savvy individual who generates 1 coin every 30 seconds.'
   ghost_role_name: 'Ghost'
-  ghost_description: 'A Class-D with the ability to pass thorugh doors but at the cost of slowed movement'
-  ghost_ability_description: 'Press ALT to be able to pass thorugh doors for 10 seconds with a 90 second cooldown'
+  ghost_description: 'A Class-D with the ability to pass thorugh doors but at the cost of slowed stamina'
+  ghost_ability_description: 'Press ALT to be able to pass thorugh doors for 20 seconds with a 90 second cooldown'
   ghost_ability_cooldown: 'ability under cooldown %n% default cooldown = 90 seconds'
   light_technician_role_name: 'Light Technician'
-  light_technician_description: 'A Guard with the ability to turn off lights in the next 5 or less rooms'
-  light_technician_ability_description: 'Press ALT to be able to turn off lights in your current room with a 200 second cooldown'
+  light_technician_description: 'A Guard with the ability to turn off lights in the room he is currently in '
+  light_technician_ability_description: 'Press ALT to be able to turn off lights in your current room with a 120 second cooldown'
   light_technician_ability_cooldown: 'ability under cooldown %n% default cooldown = 120 seconds'
   s_c_p1058_role_name: 'SCP-1058'
   s_c_p1058_description: 'A ClassD which possesses uncontrollable invisibility'
@@ -232,6 +255,10 @@ ISC:
   telekinetic_dboy_description: 'A Dboy that can open a door at any range'
   telekinetic_dboy_ability_description: 'Look at a door button and press alt to open it aslong as you have a keycard to open the door if needed and it isnt locked'
   telekinetic_dboy_ability_denied: 'Access Denied'
+  warden_role_name: 'Warden'
+  warden_description: 'A Facility guard able to see through the dark'
+  warden_ability_description: 'a'
+  warden_ability_word: 'Ability'
 ```
 
 ### SetSubClass command
