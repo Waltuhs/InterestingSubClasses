@@ -28,6 +28,7 @@ namespace InterestingSubClasses.Commands
             RegisterCommand(new SetLightTechCommand());
             RegisterCommand(new SetSCP1058Command());
             RegisterCommand(new SetTelekineticDboyCommand());
+            RegisterCommand(new SeWardenCommand());
         }
 
         protected override bool ExecuteParent(ArraySegment<string> arguments, ICommandSender sender, out string response)
@@ -390,6 +391,42 @@ namespace InterestingSubClasses.Commands
             response = "You have been given the TelekineticDboy SubClass";
             return true;
         }
+    }
+
+        public class SeWardenCommand : ICommand
+    {
+        public string Command { get; } = "warden";
+        public string[] Aliases { get; } = Array.Empty<string>();
+        public string Description { get; } = "Sets the warden SubClass for the command sender.";
+
+        public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
+        {
+            if (!(sender is PlayerCommandSender playerSender))
+            {
+                response = "This command can only be run by a player";
+                return false;
+            }
+
+            Player player = Player.Get(playerSender);
+
+            if (Plugin.Instance.customRoles.TryGetValue(player, out string currentRole) && currentRole == $"{Plugin.Instance.Translation.TelekineticDboyRoleName}")
+            {
+                response = "You already have the warden SubClass";
+                return false;
+            }
+
+            var warden = Plugin.Instance.registeredRoles.OfType<Warden>().FirstOrDefault();
+            if (warden == null)
+            {
+                response = "warden role is not enabled or registered";
+                return false;
+            }
+
+            warden.AddRole(player);
+            response = "You have been given the warden SubClass";
+            return true;
+        }
+        public bool SanitizeResponse { get; } = true;
     }
 }
 

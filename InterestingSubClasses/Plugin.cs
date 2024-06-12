@@ -18,7 +18,7 @@ namespace InterestingSubClasses
         public override string Name => "InterestingSubClasses";
         public override string Prefix => "ISC";
         public override Version RequiredExiledVersion => new Version(8, 9, 4);
-        public override Version Version => new Version(2, 1, 3);
+        public override Version Version => new Version(2, 2, 0);
         public List<ISCRoleAPI> registeredRoles = new List<ISCRoleAPI>();
         public Dictionary<Player, string> customRoles = new Dictionary<Player, string>();
         public Dictionary<Player, CoroutineHandle> activeCoroutines = new Dictionary<Player, CoroutineHandle>();

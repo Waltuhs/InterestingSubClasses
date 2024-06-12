@@ -42,7 +42,7 @@ namespace InterestingSubClasses.Patches
 
             if (Plugin.Instance.customRoles.TryGetValue(player, out string role))
             {
-                return role == Plugin.Instance._translations.SCP999RoleName;
+                return role == Plugin.Instance.Translation.SCP999RoleName;
             }
 
             return false;

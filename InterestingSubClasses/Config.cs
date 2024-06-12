@@ -196,6 +196,24 @@ namespace InterestingSubClasses
         [Description("XYZ to spawn TelekineticDboy at if its enabled")]
         public Vector3 TelekineticDboyXYZ { get; set; } = new Vector3(9f, 9f, 9f);
 
+        [Description("Enable or disable TelekineticDboy role")]
+        public bool WardenRoleEnabled { get; set; } = true;
+
+        [Description("The spawn chance for TelekineticDboy role (0.0 to 1.0) (0.50 = 50%)")]
+        public float WardenSpawnChance { get; set; } = 0.50f;
+
+        [Description("The maximum number of players that can be assigned the TelekineticDboy role")]
+        public int WardenMaxCount { get; set; } = 1;
+
+        [Description("TelekineticDboy spawn room")]
+        public RoomType WardenRoom { get; set; } = RoomType.LczArmory;
+
+        [Description("Whether the xyz spawn overrides the room spawn")]
+        public bool WardenXYZEnabled { get; set; } = false;
+
+        [Description("XYZ to spawn TelekineticDboy at if its enabled")]
+        public Vector3 WardenXYZ { get; set; } = new Vector3(9f, 9f, 9f);
+
         [Description("Should hints be broadcasts instead?")]
         public bool Broadcasts { get; set; } = false;
 
