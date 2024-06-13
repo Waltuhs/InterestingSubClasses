@@ -21,6 +21,7 @@ ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game w
 ### READ BEFORE A BUG REPORT!!!
 A) the ALT "keybind" for abilities is actually just your no clip key but is alt by default and not many people change that so theres no point in adding confusion with labeling it the "no clip key"
 B) The command SSC (SetSubClass) will only work if you werent a subclass before using it (you can also die as a subclass then use the command perfectly fine)
+C) THERE WILL BE ISSUES WITH THE SUBCLASSES IF YOU HIT THE "restart round" button in RA! to avoid this you can turn on full restart server on round restart ig
 
 ### SubClass picking system
 Each SubClass by default has a 50% chance of spawning and The maximum number of players that can be assigned it on round start is 1 (all adjustable in config)
