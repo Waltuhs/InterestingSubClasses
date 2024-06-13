@@ -74,7 +74,7 @@ namespace InterestingSubClasses
             }
             ServerConsole.AddLog("[ISC] Roles registered.", ConsoleColor.DarkBlue);
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
-            Exiled.Events.Handlers.Server.EndingRound -= OnRoundEnded;
+            Exiled.Events.Handlers.Server.RestartingRound -= OnRoundEnded;
             base.OnEnabled();
         }
 
@@ -83,7 +83,7 @@ namespace InterestingSubClasses
             Instance = null;
             _harmony.UnpatchAll($"com.{Author}.{Name}");
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
-            Exiled.Events.Handlers.Server.EndingRound -= OnRoundEnded;
+            Exiled.Events.Handlers.Server.RestartingRound -= OnRoundEnded;
             base.OnDisabled();
         }
 
@@ -149,7 +149,7 @@ namespace InterestingSubClasses
             return player.Role == roleType;
         }
 
-        private void OnRoundEnded(EndingRoundEventArgs ev)
+        private void OnRoundEnded()
         {
             foreach (var coroutine in activeCoroutines.Values)
             {
