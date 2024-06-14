@@ -63,17 +63,10 @@ namespace InterestingSubClasses
             UnsubscribeFromEvents();
         }
 
-        private void OnChangingRole(ChangingRoleEventArgs ev)
-        {
-            RemoveRole(ev.Player);
-            UnsubscribeFromEvents();
-        }
-
         private void SubscribeToEvents()
         {
             Exiled.Events.Handlers.Player.Died += OnPlayerDied;
             Exiled.Events.Handlers.Server.EndingRound += OnRoundEnded;
-            Exiled.Events.Handlers.Player.ChangingRole += OnChangingRole;
             SubscribeEvents();
         }
 
@@ -81,7 +74,6 @@ namespace InterestingSubClasses
         {
             Exiled.Events.Handlers.Player.Died -= OnPlayerDied;
             Exiled.Events.Handlers.Server.EndingRound -= OnRoundEnded;
-            Exiled.Events.Handlers.Player.ChangingRole -= OnChangingRole;
             UnsubscribeEvents();
         }
 
