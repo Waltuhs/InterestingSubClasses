@@ -2,6 +2,10 @@
 ![downloads](https://img.shields.io/github/downloads/Waltuhs/InterestingSubClasses/total?logo=github&style=for-the-badge)
 ![ver](https://img.shields.io/github/v/release/Waltuhs/InterestingSubClasses?include_prereleases&logo=github&style=for-the-badge)
 
+(partially outdated)
+(subclass scps voice chat causes players to be kicked supposedly)
+i will update this plugin on the release of 14.0 to fix any and all issues, if u have any issues dm walter.jr. on discord and say it yk
+
 ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game without needing Exiled.CustomRoles
 
 ### SubClasses
