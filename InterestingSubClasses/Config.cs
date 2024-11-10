@@ -221,6 +221,6 @@ namespace InterestingSubClasses
         public Vector3 KidSize { get; set; } = new Vector3(1.1f, 0.8f, 1.1f);
 
         [Description("SCP-999 size")]
-        public Vector3 size999 { get; set; } = new Vector3(1.1f, 0.9f, 1.3f);
+        public Vector3 size999 { get; set; } = new Vector3(1.0f, 0.8f, 1.0f);
     }
 }
