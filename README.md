@@ -213,9 +213,9 @@ ISC:
     z: 1.1
   # SCP-999 size
   size999:
-    x: 1.1
-    y: 0.9
-    z: 1.3
+    x: 1.0
+    y: 0.8
+    z: 1.0
 ```
 
 ### Translations
