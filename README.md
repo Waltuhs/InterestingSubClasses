@@ -35,9 +35,9 @@ ISC:
 # is the plugin enabled?
   is_enabled: true
   # is Debug mode enabled?
-  debug: true
+  debug: false
   # Minimum number of players required for subclasses to be enabled
-  min_players_for_subclasses: 0
+  min_players_for_subclasses: 5
   # Enable or disable SCP-999 role
   s_c_p999_role_enabled: true
   # The spawn chance for SCP-999 role (0.0 to 1.0) (0.50 = 50%)
@@ -183,7 +183,7 @@ ISC:
   telekinetic_dboy_room: LczClassDSpawn
   # Whether the xyz spawn overrides the room spawn
   telekinetic_dboy_x_y_z_enabled: false
-  # XYZ to spawn TelekineticDboy at if its enabled
+  # XYZ to spawn warden at if its enabled
   telekinetic_dboy_x_y_z:
     x: 9
     y: 9
@@ -195,7 +195,7 @@ ISC:
   # The maximum number of players that can be assigned the warden role
   warden_max_count: 1
   # warden spawn room
-  warden_room: LczClassDSpawn
+  warden_room: LczArmory
   # Whether the xyz spawn overrides the room spawn
   warden_x_y_z_enabled: false
   # XYZ to spawn warden at if its enabled
@@ -212,9 +212,9 @@ ISC:
     z: 1.1
   # SCP-999 size
   size999:
-    x: 1.0
-    y: 0.8
-    z: 1.0
+    x: 1
+    y: 1
+    z: 1
 ```
 
 ### Translations
@@ -222,18 +222,18 @@ ISC:
 ISC:
   sub_class_spawn_hint: 'You''ve been set to'
   site_costume_manager_role_name: 'Site Costume Manager'
-  site_costume_manager_description: 'Can disguise all people in the same room as him as scientists for a minute.'
+  site_costume_manager_description: 'Can disguise all people in the same room as him as scientists for a minute'
   site_costume_manager_ability_description: 'Press ALT to disguise everyone in the room you''re in as a scientist'
   site_costume_manager_ability_cooldown: 'ability under cooldown %n% default cooldown = 120 seconds'
   s_c_p999_role_name: 'SCP-999'
-  s_c_p999_description: 'A friendly SCP that provides passive regeneration to nearby players, can pickup 20 pieces of candy, able to HEAR scps and slightly slowed movement.'
+  s_c_p999_description: 'A friendly SCP that provides passive regeneration to nearby players, can pickup 20 pieces of candy, able to HEAR scps and slightly slowed movement'
   the_kid_role_name: 'The Kid'
-  the_kid_description: 'A short classD with more stamina and can pick up 5 candies.'
+  the_kid_description: 'A short classD with a speed boost and can pick up 5 candies'
   joe_biden_role_name: 'Joe Biden'
-  joe_biden_description: 'A guard that has slowed movement but enhanced firepower.'
+  joe_biden_description: 'A guard that has slowed movement but enhanced firepower'
   class_d_informer_role_name: 'ClassD Informer'
-  class_d_informer_description: 'A Class-D personnel with access to critical information.'
-  class_d_informer_ability_description: 'Receives constant updates on the status of the warhead, SCPs, and NTF remaining.'
+  class_d_informer_description: 'A Class-D personnel with access to critical information'
+  class_d_informer_ability_description: 'Receives constant updates on the status of the warhead, SCPs, and NTF remaining'
   warhead: 'Warhead'
   ntf: 'NTF'
   scps: 'SCPS'
@@ -242,10 +242,10 @@ ISC:
   in_progress_translation: 'In Progress'
   not_armed_translation: 'Not Armed'
   businessman_role_name: 'Businessman'
-  businessman_description: 'A savvy individual who generates 1 coin every 30 seconds.'
+  businessman_description: 'A savvy individual who generates 1 coin every 30 seconds'
   ghost_role_name: 'Ghost'
-  ghost_description: 'A Class-D with the ability to pass thorugh doors but at the cost of slowed stamina'
-  ghost_ability_description: 'Press ALT to be able to pass thorugh doors for 20 seconds with a 90 second cooldown'
+  ghost_description: 'A Class-D with the ability to pass through doors but at the cost of slowed movement'
+  ghost_ability_description: 'Press ALT to be able to pass thorugh doors for 10 seconds with a 90 second cooldown'
   ghost_ability_cooldown: 'ability under cooldown %n% default cooldown = 90 seconds'
   light_technician_role_name: 'Light Technician'
   light_technician_description: 'A Guard with the ability to turn off lights in the room he is currently in '
@@ -259,9 +259,10 @@ ISC:
   telekinetic_dboy_ability_description: 'Look at a door button and press alt to open it aslong as you have a keycard to open the door if needed and it isnt locked'
   telekinetic_dboy_ability_denied: 'Access Denied'
   warden_role_name: 'Warden'
-  warden_description: 'A Facility guard able to see through the dark'
-  warden_ability_description: 'a'
+  warden_description: 'A Facility guard able to disable the flashbanged effect via pressing alt'
+  warden_ability_description: 'By pressing alt you can disable the flashbang effect'
   warden_ability_word: 'Ability'
+  warden_ability_regening: 'The ability cant be used while regenerating'
 ```
 
 ### SetSubClass command
