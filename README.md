@@ -20,7 +20,7 @@ ISC is a SCP: SL exiled plugin that addes various silly SubClasses to the game w
 | SCP-999 | A friendly SCP that provides passive regeneration to nearby players, can pickup 20 pieces of candy, able to HEAR scps and slightly slowed movement |
 | Site Costume Manager | A scientist that can disguise all people in the same room as him as scientists for a minute by pressing ALT (has a 2 minute cooldown) |
 | Telekinetic Dboy | A ClassD that can Look at a door button and press alt to open it aslong as you have a keycard to open the door if needed and it isnt locked |
-| Warden | A Facility guard able to see through the dark and flashbangs via pressing alt with a 5 second cooldown |
+| Warden | A Facility guard able to disable the flashbanged effect via pressing alt with a 10 second cooldown and 5 second duration (kinda stupid)| 
 
 ### READ BEFORE A BUG REPORT!!!
 A) the ALT "keybind" for abilities is actually just your no clip key but is alt by default and not many people change that so theres no point in adding confusion with labeling it the "no clip key"
