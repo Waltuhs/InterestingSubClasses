@@ -51,7 +51,7 @@ namespace InterestingSubClasses
         public string TelekineticDboyRoleName { get; set; } = "Telekinetic Dboy";
         public string TelekineticDboyDescription { get; set; } = "A Dboy that can open a door at any range";
         public string TelekineticDboyAbilityDescription { get; set; } = "Look at a door button and press alt to open it aslong as you have a keycard to open the door if needed and it isnt locked";
-        public string TelekineticDboyAbilityDenied { get; set; } = "Access Denied";
+        public string TelekineticDboyAbilityDenied { get; set; } = "<color=red>Access Denied</color>";
 
         public string wardenRoleName { get; set; } = "Warden";
         public string wardenDescription { get; set; } = "A Facility guard able to see through the dark and flashbangs via pressing alt";

@@ -74,7 +74,8 @@ namespace InterestingSubClasses
             }
             ServerConsole.AddLog("[ISC] Roles registered.", ConsoleColor.DarkBlue);
             Exiled.Events.Handlers.Server.RoundStarted += OnRoundStarted;
-            Exiled.Events.Handlers.Server.RestartingRound -= OnRoundEnded;
+            Exiled.Events.Handlers.Server.RestartingRound += OnRoundEnded;
+            Exiled.Events.Handlers.Player.VoiceChatting += OnVoiceChatting;
             base.OnEnabled();
         }
 
@@ -84,6 +85,7 @@ namespace InterestingSubClasses
             _harmony.UnpatchAll($"com.{Author}.{Name}");
             Exiled.Events.Handlers.Server.RoundStarted -= OnRoundStarted;
             Exiled.Events.Handlers.Server.RestartingRound -= OnRoundEnded;
+            Exiled.Events.Handlers.Player.VoiceChatting -= OnVoiceChatting;
             base.OnDisabled();
         }
 
@@ -158,6 +160,29 @@ namespace InterestingSubClasses
             customRoles.Clear();
             scp330PickupCount.Clear();
             activeCoroutines.Clear();
+        }
+
+        private void OnVoiceChatting(VoiceChattingEventArgs ev)
+        {
+            if (ev.VoiceMessage.Channel != VoiceChatChannel.ScpChat)
+                return;
+
+            foreach (Player listener in Player.List)
+            {
+                if (Instance.customRoles.TryGetValue(listener, out string role)
+                    && role == Plugin.Instance.Translation.SCP999RoleName)
+                {
+                    var msg = new VoiceMessage
+                    {
+                        Speaker = ev.VoiceMessage.Speaker,
+                        Data = ev.VoiceMessage.Data,
+                        DataLength = ev.VoiceMessage.DataLength,
+                        Channel = VoiceChatChannel.Intercom 
+                    };
+
+                    listener.ReferenceHub.connectionToClient.Send(msg);
+                }
+            }
         }
     }
 }

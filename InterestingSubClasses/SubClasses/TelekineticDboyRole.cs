@@ -60,26 +60,42 @@ namespace InterestingSubClasses.SubClasses
 
         private void Open(Player player, GameObject gameobject)
         {
-            if (gameobject.GetComponentInParent<RegularDoorButton>() is RegularDoorButton button)
-            {
-                Door door = Door.Get(button.GetComponentInParent<DoorVariant>());
-                if (door is null || door.IsMoving || (door.IsLocked && !player.IsBypassModeEnabled) || (door.IsCheckpoint && door.IsOpen))
-                    return;
+            Door door = Door.Get(gameobject);
 
-                if (door.IsKeycardDoor && (!player.Items.Any(item => item is Keycard keycard && (keycard.Base.Permissions & door.RequiredPermissions.RequiredPermissions) != 0)))
+            if (door is null || door.IsMoving || (door.IsLocked && !player.IsBypassModeEnabled) || (door.IsPartOfCheckpoint && door.IsOpen) || (door.IsCheckpoint && door.IsOpen))
+                return;
+
+            if (door.IsKeycardDoor || door.IsPartOfCheckpoint)
+            {
+                bool hasAccess;
+
+                if (door.IsPartOfCheckpoint)
+                {
+                    hasAccess = player.Items
+                        .OfType<Keycard>()
+                        .Any(kc => (kc.Permissions & KeycardPermissions.Checkpoints) != 0);
+                }
+                else
+                {
+                    hasAccess = player.Items
+                        .OfType<Keycard>()
+                        .Any(kc => (kc.Permissions & door.KeycardPermissions) != 0);
+                }
+
+                if (!hasAccess)
                 {
                     player.Broadcast(1, Plugin.Instance.Translation.TelekineticDboyAbilityDenied);
                     return;
                 }
+            }
 
-                if (door.IsOpen)
-                {
-                    door.IsOpen = false;
-                }
-                else
-                {
-                    door.IsOpen = true;
-                }
+            if (door.IsOpen)
+            {
+                door.IsOpen = false;
+            }
+            else
+            {
+                door.IsOpen = true;
             }
         }
     }
